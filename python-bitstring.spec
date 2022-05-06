@@ -2,7 +2,7 @@
 
 Name:           python-%{srcname}
 Version:        3.1.7
-Release:        1
+Release:        2
 Summary:        Simple construction, analysis and modification of binary data
 
 License:        MIT
@@ -27,7 +27,7 @@ to a file or stream.
 %package -n python%{python3_pkgversion}-%{srcname}
 Summary:        %{summary}
 BuildRequires:  python%{python3_pkgversion}-devel
-BuildRequires:  python%{python3_pkgversion}-nose
+BuildRequires:  python%{python3_pkgversion}-pytest
 %{?python_provide:%python_provide python%{python3_pkgversion}-%{srcname}}
 
 %description -n python%{python3_pkgversion}-%{srcname}
@@ -57,7 +57,7 @@ sed -i '1{s|^#!/usr/bin/env python||}' %{srcname}.py
 
 
 %check
-%{__python3} -m nose -w test
+cd test && pytest
 
 
 %files -n python%{python3_pkgversion}-%{srcname}
@@ -69,5 +69,8 @@ sed -i '1{s|^#!/usr/bin/env python||}' %{srcname}.py
 
 
 %changelog
+* Fri May 06 2022 YukariChiba <i@0x7f.cc> - 3.1.7-2
+- Replace deprecated nose with pytest
+
 * Wed Jun 30 2021 Lianguo Wang <wanglianguo@kylinos.cn> - 3.1.7
 - Add src.
